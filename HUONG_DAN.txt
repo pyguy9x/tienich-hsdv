@@ -1,0 +1,206 @@
+TIỆN ÍCH CHROME "ĐIỀN HỒ SƠ ĐẢNG VIÊN" – v0.8.4
+Bước 1 Thông tin cơ bản · Bước 2 Quá trình công tác · Bước 8 Quan hệ gia đình · Bước 9 Hoàn cảnh kinh tế
+
+CÀI ĐẶT / CẬP NHẬT (Chrome 116 trở lên)
+ 1. chrome://extensions -> Xóa bản cũ -> bật "Chế độ dành cho nhà phát triển".
+ 2. Giải nén v0.6 ra thư mục cố định -> "Tải tiện ích đã giải nén" -> chọn thư mục.
+ 3. Bấm biểu tượng tiện ích -> bảng bên mở ở cạnh phải trình duyệt.
+
+1. NHẬP FILE & TỔNG QUAN
+ - "Nhập từ file Excel" (hoặc kéo thả). Chọn hồ sơ.
+ - Mục "Tổng quan dữ liệu chuẩn bị điền" hiện toàn bộ dữ liệu của hồ sơ theo từng bước (B1, B2, B8, B9).
+   Sửa trực tiếp trong ô nếu chưa đúng; có thể thêm/xóa dòng công tác, người thân. Thay đổi chỉ lưu trong phiên trình duyệt,
+   KHÔNG sửa file Excel gốc.
+ - Sau khi So sánh từng bước, Tổng quan báo số trường/dòng ĐÃ CÓ trên trang và đánh dấu ⚠ ở các ô đó.
+
+2. ĐIỀN THEO TỪNG BƯỚC (thẻ B1 / B2 / B8 / B9) – mở đúng mục tương ứng của hồ sơ trên trang trước
+ B1 – Thông tin cơ bản: So sánh -> ô trống chọn sẵn; ô đã có dữ liệu khác chỉ thay khi anh/chị tích và xác nhận.
+ B2 – Quá trình công tác, B8 – Quan hệ gia đình:
+   So sánh với bảng trên trang -> "Đã có" (khớp Từ tháng/năm + Tên tổ chức; hoặc Họ tên + Quan hệ) / "Mới".
+   Điền: dòng mới bấm "Thêm mới"; dòng đã có chỉ điền ô còn trống. Sau mỗi dòng tiện ích DỪNG chờ anh/chị bấm
+   "Lưu thông tin" (sang dòng tiếp) hoặc "Đóng" (bỏ qua).
+ B9 – Hoàn cảnh kinh tế: So sánh -> báo từng ô: trống (sẽ điền) / đã có dữ liệu khác (giữ nguyên) / trùng.
+   Điền: tiện ích bấm "Chỉnh sửa thông tin", điền ô trống, tự "Thêm tài sản" khi cần, rồi DỪNG chờ anh/chị bấm "Lưu thông tin".
+ Thanh "Tạm dừng / Dừng hẳn" hiện ở đầu bảng bên khi đang điền (và ở bảng nhỏ trên trang).
+ Bảng nhỏ trên trang: giữ chuột ở thanh đỏ (biểu tượng ⠿) để KÉO sang chỗ khác; nút "—" để THU NHỎ, "▢" để mở lại.
+ Vị trí và trạng thái thu nhỏ được nhớ trong phiên làm việc.
+
+LƯU Ý NGHIỆP VỤ
+ - Số thẻ đảng 12 chữ số, trùng số căn cước. Số lý lịch 8–9 ký tự. Ngày dd/mm/yyyy; năm sinh người thân yyyy;
+   tháng công tác mm/yyyy hoặc yyyy.
+ - Chức vụ đảng (B2) chọn nhiều: cách nhau dấu ; theo đúng tên trong trang DanhMuc.
+ - B9: số tiền, diện tích chỉ ghi số; các ô diện tích, đất trang trại, lao động hệ thống chỉ nhận SỐ NGUYÊN.
+ - Ở B9, nếu bấm "Đóng" khi đang sửa, hệ thống hỏi "Thoát" và đưa về danh sách đảng viên (không lưu).
+ - Bảng B2/B8 hiển thị 10 dòng/trang; nếu nhiều hơn, tiện ích cảnh báo vì chỉ thấy trang đang mở.
+ - Không bao giờ bấm "Xoá dữ liệu" ở mục Hoàn cảnh kinh tế (tiện ích không dùng nút này).
+ - Dữ liệu đã nhập chỉ giữ trong phiên trình duyệt, tự xóa khi đóng Chrome.
+
+=== v0.7.0: TẢI DỮ LIỆU ĐÃ LƯU TRÊN ĐÁM MÂY ===
+1. Mở mục "Cài đặt đám mây", nhập mã bí mật (do quản trị viên cung cấp). Chỉ cần nhập một lần.
+2. Bấm "☁ Tải dữ liệu đã lưu" để xem danh sách hồ sơ do app quét (bản v4) lưu lên.
+3. Gõ tên / CCCD / ID vào ô tìm kiếm, tích chọn hồ sơ cần điền, bấm "Nạp ... hồ sơ đã chọn".
+4. Các bước so sánh, điền B1, B2, B8, B9 thực hiện như khi nhập từ Excel.
+Lưu ý: nạp từ đám mây sẽ thay danh sách hồ sơ đang dùng. Nhập từ Excel vẫn dùng bình thường.
+
+=== v0.7.1: MỤC "CÒN THIẾU – CẦN BỔ SUNG" ===
+- Nằm trong mục "Tổng quan", hiện cho từng hồ sơ.
+- B1 và B9: sau khi bấm So sánh, liệt kê các trường trống cả trong dữ liệu lẫn trên trang (bỏ qua ô bị khóa, ô ẩn và ô tích chọn).
+- B2 và B8: nhắc các dòng thiếu trường chính (B2: Từ tháng/năm, Tên tổ chức, Chức danh; B8: Phân loại, Quan hệ, Họ tên, Năm sinh) hoặc chưa có dòng nào.
+- Bấm "📋 Sao chép danh sách thiếu" để dán vào sổ theo dõi, nhắn cho người phụ trách bổ sung.
+
+=== v0.7.2 ===
+- B1: danh sách thiếu tách 2 nhóm: trường BẮT BUỘC (trên trang có dấu * đỏ – phải bổ sung mới lưu được) và trường không bắt buộc (thu gọn, bấm để xem).
+- Tiện ích tự đọc dấu * trên trang khi bấm So sánh, nên tự đúng khi hệ thống thay đổi trường bắt buộc.
+
+=== v0.7.3 ===
+- B1: chưa bấm So sánh vẫn báo ngay 21 trường bắt buộc (*) còn trống trong dữ liệu (danh sách lấy từ trang Chỉnh sửa thông tin cơ bản).
+- Thêm khung "Các mục tiện ích chưa điền – nhập tay": nhắc trường bắt buộc của mục 3, 4, 5, 6, 7, 10.
+
+=== v0.8.0: ĐỦ 11 MỤC ===
+- Thêm thẻ: B3 Đào tạo, B4 Huy hiệu, B5 Khen thưởng / Đánh giá / Kỷ luật, B6 Lịch sử, B7 Nước ngoài, B10 Mạng XH.
+- B3, B4, B5, B7, B10: giống B2/B8 – mở đúng mục trên trang, bấm So sánh, rồi Điền. Dòng mới tiện ích bấm "Thêm mới" và điền; dòng đã có chỉ điền ô trống. Mỗi dòng dừng chờ anh/chị bấm "Lưu thông tin".
+- B5: tiện ích tự chuyển đúng tab Khen thưởng / Đánh giá / Kỷ luật.
+- B6: mở mục 6, bấm "Chỉnh sửa thông tin" trên trang rồi mới So sánh; điền xong anh/chị tự bấm Lưu.
+- B11 Quá trình sinh hoạt Đảng: hệ thống tự ghi, không có nút Thêm mới – không điền.
+- File mẫu Excel có thêm các trang: DaoTao, HuyHieu, KhenThuong, DanhGia, KyLuat, DiNuocNgoai, MangXaHoi, DacDiemLichSu (cột A = số căn cước đảng viên).
+
+=== v0.8.1: CHẠY TỰ ĐỘNG B1 → B10, TÔ ĐỎ Ô AI CHƯA CHẮC ===
+1. Dùng cùng app quét bản v6 (scan_ocr_v6.html): khi quét, AI ghi lại ô chưa chắc kèm lý do
+   (chưa chắc dấu thanh, chưa chắc chữ số, chữ mờ, không khớp danh mục...) và lưu lên đám mây cùng hồ sơ.
+2. Trong tiện ích: Tải dữ liệu đã lưu -> chọn hồ sơ -> Nạp.
+   - Nếu đang mở trang hồ sơ (Xem thông tin đảng viên, hoặc Thêm mới) tiện ích tự chạy ngay;
+     nếu chưa, mở trang hồ sơ của người đó, tiện ích tự chạy khi trang tải xong.
+   - Tiện ích tự chọn đúng hồ sơ trong danh sách theo số căn cước/họ tên đang hiện trên trang.
+3. Lần lượt từng mục B1, B2, B3, B4, B5 (3 thẻ), B6, B7, B8, B9, B10:
+   mở mục -> bấm "Chỉnh sửa thông tin" hoặc "Thêm mới"/nút sửa dòng -> điền -> tự bấm "Lưu thông tin" -> chờ hệ thống báo thành công.
+   - Dữ liệu đám mây/Excel được coi là chuẩn: ô trống được điền, ô đang có dữ liệu khác được THAY.
+   - Mục không có dữ liệu thì bỏ qua; mục không có gì thay đổi thì không bấm Lưu.
+4. Tiện ích DỪNG HỎI anh/chị khi:
+   - Họ tên / số căn cước / ngày sinh trên trang khác dữ liệu (có thể mở nhầm hồ sơ) – luôn hỏi, không tắt được.
+   - Sắp thay trường QUAN TRỌNG đang có dữ liệu khác: họ tên, giới tính, ngày sinh, CCCD, số thẻ, số lý lịch,
+     ngày vào Đảng, ngày chính thức, tổ chức đảng (tắt được bằng ô tích "Hỏi trước khi thay trường quan trọng").
+   - Hệ thống báo lỗi khi Lưu (VD thiếu trường bắt buộc): sửa trên trang rồi bấm "Lưu thông tin", tiện ích tự chạy tiếp;
+     hoặc bấm "Bỏ qua mục này" trên bảng bên (với dòng trong hộp thoại: bấm "Đóng" để bỏ qua dòng đó).
+5. Ô AI chưa chắc: viền ĐỎ + dòng chữ "⚠ AI chưa chắc: <lý do>" ngay dưới ô trên trang; dòng trong bảng
+   (công tác, gia đình...) được tô nền đỏ. Báo cáo trên bảng bên liệt kê theo từng mục, bấm
+   "Mở mục này trên trang và tô đỏ" để chuyển tới rà soát. Trong "Tổng quan" các ô này cũng tô đỏ; bấm "✓ Đúng" sau khi đối chiếu.
+6. Bước cuối: rà soát xong bấm "✔ Xác nhận hoàn tất – Đóng hồ sơ". Tiện ích bấm "Đóng hồ sơ" trên trang và chuyển sang
+   hồ sơ kế tiếp; mở trang hồ sơ người tiếp theo là tiện ích tự chạy.
+7. "Bắt đầu từ": chạy lại từ một mục bất kỳ (VD sau khi Thêm mới đảng viên, mở hồ sơ vừa tạo rồi chọn B2).
+Lưu ý:
+ - Có thể Tạm dừng / Dừng hẳn bất cứ lúc nào (thanh trên cùng bảng bên hoặc bảng nhỏ trên trang).
+ - Dữ liệu nhập từ Excel không mang thông tin "AI chưa chắc" (chỉ dữ liệu đám mây từ app quét v6, v5 có).
+ - Thay dữ liệu cũ trên hệ thống chính thức là thao tác có trách nhiệm: nên chạy thử vài hồ sơ, kiểm tra
+   "Lịch sử thay đổi thông tin" trước khi chạy hàng loạt.
+
+
+=== v0.8.2: HỎI "GIỮ NGUYÊN / THAY THẾ" VỚI Ô AI CHƯA CHẮC ===
+- Khi chạy tự động gặp ô AI chưa chắc (viền đỏ) mà trên trang đang có dữ liệu KHÁC dữ liệu đám mây, tiện ích hiện hộp nhỏ ngay cạnh ô: dòng chữ mờ là nội dung gốc trên trang, bên dưới là dữ liệu đám mây và lý do AI chưa chắc.
+- Bấm "Thay thế": điền dữ liệu đám mây. Bấm "Giữ nguyên": giữ dữ liệu cũ trên trang. Ô vẫn tô đỏ để rà soát; lựa chọn Giữ nguyên được ghi trong báo cáo.
+- Ô trống trên trang thì điền thẳng, không hỏi. Có thể tắt hộp hỏi bằng ô tick "Ô AI chưa chắc đang có dữ liệu khác trên trang…".
+- Áp dụng cho B1, B2–B8, B6 và B9. Ô AI chưa chắc thuộc nhóm "quan trọng" đã hỏi bằng hộp này thì không hỏi thêm hộp xác nhận cũ.
+- Ô danh mục Quốc gia, Tỉnh, Xã/Phường của B1 (nơi khai sinh, quê quán, thường trú) còn trống cả trên file lẫn trên trang được chọn sẵn Việt Nam / Tỉnh Lào Cai / Xã Mậu A (sửa được trong bảng bên; không ghi đè ô đã có dữ liệu).
+
+
+=== v0.8.3: B1 ĐIỀN THẲNG – DANH SÁCH RÀ SOÁT ===
+- B1 Thông tin cơ bản: điền toàn bộ dữ liệu có trong đám mây vào các ô, ô nào khác thì thay, KHÔNG hỏi từng trường, không hiện hộp xác nhận. Ô AI cân nhắc vẫn được điền bằng dữ liệu mới và tô đỏ trong lúc chạy. (Chỉ còn một cảnh báo: khi họ tên/CCCD/ngày sinh trên trang khác hẳn dữ liệu – có thể mở nhầm hồ sơ – tiện ích vẫn dừng hỏi để tránh ghi đè sai người.)
+- B6, các mục danh sách và B9 vẫn dùng hộp Giữ nguyên / Thay thế của v0.8.2 (tắt được bằng ô tick trong bảng bên).
+- Chạy xong cả hồ sơ: tiện ích XÓA toàn bộ ghi chú trên trang (tô đỏ, hộp hỏi) và lập "Danh sách RÀ SOÁT" gồm: ô AI cân nhắc, ô giữ dữ liệu cũ chưa thay, ô/mục chưa điền hoặc lỗi, trường bắt buộc B1 chưa có dữ liệu.
+- Hồ sơ nạp từ đám mây: danh sách được lưu tự động lên đám mây tại mục "rasoat/<mã hồ sơ>" (trạng thái "chờ rà soát"). Hồ sơ nhập từ Excel: dùng nút "Tải danh sách rà soát (CSV)".
+- Team rà soát chỉ cần kiểm tra và sửa đúng các mục có tên trong danh sách này.
+
+
+=== v0.8.4: CHẠY MỘT LƯỢT B1 → B10, ÍT HỎI NHẤT ===
+- B1 và B8 điền thẳng dữ liệu đám mây, không hỏi. Hộp Giữ nguyên/Thay thế của B6, B9 và các mục danh sách chỉ hiện khi tick ô tùy chọn (mặc định TẮT). Đóng hồ sơ không còn hộp hỏi xác nhận; lỗi nằm trong danh sách rà soát.
+- Dòng ở các mục danh sách (B2–B8, B10) lưu bị trang báo lỗi: tiện ích tự đóng biểu mẫu, bỏ qua dòng đó, ghi vào danh sách rà soát rồi chạy tiếp (không chờ).
+- B8 chuẩn hóa: Bố/Mẹ/Con ruột → Bố/Mẹ/Con đẻ; đã chết/mất → "Đã qua đời"; không có năm mất thì bỏ qua ô năm; phân vân Đảng viên hay không → "Không"; ô Phân loại/Quan hệ để trống → chọn mục đầu tiên trong menu ("Bản thân", "Bố đẻ") và ghi vào danh sách rà soát loại "Tự chọn mặc định".
+- B1: nếu file/đám mây để trống và trên trang cũng trống thì chọn sẵn: Loại đảng viên = "Đảng viên chính thức"; Phân loại đối tượng = "Không thuộc nhóm đối tượng có vấn đề về lịch sử chính trị và diện Bộ Chính trị, Ban Bí thư quản lý"; Quốc gia/Tỉnh/Xã như v0.8.2.
+- Nút xanh "📋 Xem rà soát" (dưới nút Tải dữ liệu đã lưu): tóm tắt số hồ sơ đã nhập, số ô AI cân nhắc, xem lại, chưa điền; bấm từng hồ sơ để xem dòng "Mục – Trường – Giá trị – Loại: ghi chú".
+- Sau khi bấm "Xác nhận hoàn tất – Đóng hồ sơ": hồ sơ nạp từ đám mây được ghi trạng thái "đã nhập tự động" (dsHoSo và rasoat) và ẨN khỏi danh sách nạp. Tick "Hiện cả hồ sơ đã nhập tự động" để xem lại.
+- Ô tick "✍ Văn bản viết tay": hồ sơ được đánh dấu vẫn chạy tự động B1 → B10 như thường (kể cả tự chạy khi nạp/mở trang), nhưng DỪNG HỎI XÁC NHẬN ở mỗi ô AI cân nhắc/không rõ: hộp nhỏ cạnh ô hiện nội dung AI đọc (sửa được), lý do, giá trị đang có trên trang; bấm "Xác nhận & điền" (điền giá trị đã xác nhận/sửa) hoặc "Bỏ qua ô này" (giữ nguyên trang). Ô đã xác nhận không còn nằm trong danh sách rà soát; ô bỏ qua vẫn nằm trong đó. Với văn bản viết tay, quy tắc "phân vân đảng viên → Không" ở B8 không áp dụng (hỏi người dùng). Chữ đánh máy chạy tự động bình thường.
+- Ô tick này cũng có trong app quét (bản v7 cập nhật): hồ sơ quét đánh dấu viết tay sẽ mang dấu sang tiện ích khi nạp từ đám mây.
+
+=== v0.8.5: TRANG QUẢN LÝ HỒ SƠ & RÀ SOÁT TÍCH HỢP ===
+- Nút xanh "🗂 Mở trang quản lý hồ sơ & rà soát" (bảng bên) mở trang quản lý trong thẻ mới; dùng chung mã bí mật đã nhập trong tiện ích.
+- Trang gồm: danh sách hồ sơ đã nhập kèm trạng thái, bộ lọc, các mục AI cân nhắc/xem lại/chưa điền của từng hồ sơ (tick "đã xử lý", đánh dấu "đã rà soát xong"), tab hồ sơ trùng (giữ một bản, xóa các bản còn lại hoặc đánh dấu "không phải trùng"), xuất CSV.
+- Xóa hồ sơ trùng là xóa vĩnh viễn trên đám mây; chỉ người được phép xử lý trùng nên dùng chức năng này.
+- Nút "📋 Xem rà soát" trong bảng bên (v0.8.5): có 3 thẻ Cần rà soát / Đã rà soát / Tất cả, tìm theo tên/CCCD, mỗi hồ sơ gom theo từng mục (B1, B2, B8, B9…), các dòng trùng ô được gộp và hiện đủ nhãn loại; tick từng ô đã xử lý và bấm "Đánh dấu đã rà soát xong" ngay trong bảng bên (ghi chung với trang quản lý).
+
+--- Bổ sung v0.8.5 ---
+- Số lý lịch: khi điền tự động, tiện ích tự thêm "YB" vào cuối (nếu chưa có) để đủ số ký tự hệ thống yêu cầu. Nếu file/đám mây để trống thì không điền.
+- Màn hình "Xem rà soát": tick một mục không còn thu gọn hồ sơ đang mở; 3 nút lọc được căn đều một hàng.
+
+--- v0.8.6: nút "Hiện vị trí cụ thể" (Xem rà soát) ---
+- Mở hồ sơ của đảng viên đó trên tcxdd.dcs.vn, vào "Xem rà soát", mở hồ sơ rồi bấm "📍 Hiện vị trí cụ thể" (xác nhận đúng hồ sơ).
+- Tiện ích lần lượt mở từng mục có vị trí cần rà soát; ô/dòng cần rà soát được viền xanh lá, kèm hộp: Trên trang / Đám mây / lý do, nút Giữ nguyên – Thay thế (ô chưa có dữ liệu hoặc dòng của bảng B2–B8: nút "Đã xem – giữ nguyên").
+- Chọn xong ở ô nào, mục tương ứng trong danh sách được tick ngay (ghi lên đám mây). Bấm "Xong mục này" (góc phải dưới trang) để sang mục kế tiếp; mục có "Thay thế" ở B1/B6 được tự bấm Lưu, B9 tự lưu.
+- Với dòng của bảng (B2–B8), "Thay thế" chưa hỗ trợ: sửa dòng trực tiếp trên trang rồi chọn "Đã xem".
+- Danh sách rà soát tạo bằng bản cũ (trước v0.8.6) chưa có thông tin vị trí – cần chạy lại hồ sơ.
+
+--- v0.8.6.1 ---
+- Chế độ tự động: sau khi nạp dữ liệu, tiện ích KHÔNG tự chạy; phải bấm "▶ Bắt đầu chạy tự động". Sau khi bấm, các hồ sơ kế tiếp mới tự chạy (nếu bật "Tự chạy hồ sơ kế tiếp").
+- Mở "Xem rà soát" sẽ khóa nút chạy tự động và ô tự chạy; đóng bảng rà soát thì mở lại.
+- B1 (tự động): chỉ điền ô nhập văn bản/ngày. Bỏ qua mọi ô menu xổ xuống, radio, tổ chức, ô chọn (Quê quán, Tỉnh, Xã, Dân tộc, Giới tính, Loại đảng viên...). Các ô bị bỏ qua mà có dữ liệu được đưa vào danh sách rà soát; dùng "Hiện vị trí cụ thể" → Thay thế để điền sau.
+- Lưu ý: B1 không còn tự chọn Quốc gia/Tỉnh/Xã mặc định và Loại đảng viên/Phân loại đối tượng mặc định.
+
+--- v0.8.6.2 ---
+- "Tải dữ liệu đã lưu": hồ sơ đã rà soát (đánh dấu "Đã rà soát xong") cũng bị ẩn cùng hồ sơ đã nhập tự động. Bật "Hiện cả hồ sơ đã nhập" để xem lại; nhãn ghi rõ ĐÃ RÀ SOÁT / ĐÃ NHẬP TỰ ĐỘNG.
+- Đánh dấu/mở lại rà soát đồng bộ trạng thái vào danh sách hồ sơ trên đám mây.
+
+--- v0.8.7 ---
+- Mã bí mật cơ sở dữ liệu đã tích hợp sẵn trong tiện ích (popup và trang quản lý) và scan_ocr_v8.1; không cần nhập. Khóa OpenRouter vẫn tự nhập.
+- Lưu ý: không chia sẻ gói tiện ích/file scan ra ngoài nhóm được phép vì có chứa mã này.
+
+--- v0.8.7.1: trang quản lý (quanly.html và file QuanLy_HoSo_RaSoat.html) có nút "🗑 Xóa hồ sơ này" trong chi tiết từng hồ sơ (xác nhận 2 lần, xóa cả dữ liệu, danh sách rà soát và mục trong danh sách).
+
+--- v0.8.7.2: làm sạch dữ liệu (ký tự lỗi, khóa không hợp lệ) trước khi gửi lên đám mây để tránh lỗi máy chủ 400 "couldn't parse JSON object".
+
+--- v0.8.7.3: đọc lý do AI chưa chắc đã lưu với khóa "0_fromDate" (scan_ocr v8.2 đổi dấu chấm trong khóa thành gạch dưới khi lưu).
+
+--- v0.8.8: B1 tự động ---
+- Sau khi bấm Bắt đầu chạy, B1 chờ danh mục 07) Xã/Phường tải đủ dữ liệu xổ xuống (tối đa 40 giây) rồi mới điền; khi sẵn sàng có thông báo trên bảng bên và tiếng bíp. Nếu không tải được hoặc ô bị khóa thì báo lỗi ngay và dừng.
+- Ba ô chọn luôn đặt cố định: 11) Nhóm nghề nghiệp = Nông nghiệp; 17) Giáo dục phổ thông = 12/12; 09) Tôn giáo = Không (không lấy từ dữ liệu). Các ô chọn khác vẫn bỏ qua như v0.8.6.1.
+
+--- v0.8.8.1: bỏ qua nghi ngờ AI ở trường "Đến tháng/năm" (B2, không bắt buộc), cả khi đọc dữ liệu đã lưu cũ.
+
+--- v0.8.9 ---
+- B3 Đào tạo: đám mây không có "Phân loại đào tạo bồi dưỡng" thì tự chọn "Đào tạo chuyên môn" (ghi vào danh sách rà soát mục "Tự chọn mặc định").
+- B1: Tỉnh, Xã (khai sinh, quê quán, thường trú) được điền từ đám mây; đám mây trống thì dùng mặc định đã cài (nếu bật), nếu không có hoặc không tìm thấy trong danh sách thì chọn mục đầu tiên.
+- Chạy tự động thành công (không lỗi) thì ghi "đã nhập" lên đám mây và ẩn hồ sơ khỏi danh sách nạp ngay, không cần chờ bấm Đóng hồ sơ.
+- Ô "Văn bản viết tay": mặc định không tích, không lấy theo đám mây; tự tích khi cần.
+- Trang quản lý: thêm thẻ "Đã nhập" (thống kê tổng đã nhập, chờ rà soát, đã rà soát, chưa nhập, theo người nhập).
+
+--- v0.8.9.1: ẩn mục "Nhập từ file Excel / Tải file mẫu" (mở lại bằng cách bỏ thuộc tính hidden của section id="khuExcel" trong popup.html).
+
+--- v0.8.9.6 ---
+- Bỏ hẳn phần đo tốc độ: không còn ô "⏱ Chạy kiểu cũ (để đo tốc độ)" và bảng "⏱ So sánh tốc độ: code cũ vs code mới"; đã xóa cả code chờ kiểu cũ trong trang (chỉ còn bản nhanh dùng MutationObserver) nên chạy mượt hơn.
+- Bỏ ô "Bắt đầu từ": bấm "▶ Bắt đầu chạy tự động" là chạy trọn B1 → B10. (Vẫn phải bấm nút, không tự chạy khi mở/nạp hồ sơ.)
+
+--- v0.8.9.7: bản gọn – chỉ còn luồng "Tải dữ liệu đã lưu → Nạp hồ sơ → Bắt đầu chạy tự động" ---
+- Ẩn 4 nút trang phụ: "📋 Xem rà soát", "🌳 Xem cây dữ liệu đám mây", "🧹 Xem & Chuẩn hóa dữ liệu đám mây", "🗂 Mở trang quản lý hồ sơ & rà soát".
+- Ẩn 3 nút "＋ Tạo hồ sơ nhập tay B1→B11", "📥 Đọc từ trang vào để soát", "📥 Đọc hết B1→B10 một lần (chỉ đọc)".
+- Các trang quản lý/cây/chuẩn hóa vẫn còn file và vẫn dùng được nếu mở trực tiếp; chỉ ẩn nút trong bảng bên.
+- Muốn hiện lại: bỏ thuộc tính hidden của các div tương ứng trong popup.html.
+
+--- v0.8.9.7 (bổ sung) ---
+- Tùy chọn "⏭ Bỏ qua Bước 1 (Thông tin cơ bản) khi chạy tự động": tích để chạy B2 → B10 (B1 lâu nhất); trạng thái được nhớ cho lần sau. Báo cáo ghi "Bỏ qua B1 (theo tùy chọn)".
+- B3 Đào tạo bồi dưỡng: ô để trống (dòng mới hoặc đám mây không nói gì) thì tự điền Phân loại = "Đào tạo chuyên môn", Trình độ = "Chứng chỉ", Nước đào tạo = "Việt Nam" (ghi vào danh sách rà soát loại "Tự chọn mặc định").
+- B5 Đánh giá: đám mây không có dòng nào thì tự thêm 3 dòng 2023 / 2024 / 2025 với Xếp loại = "Hoàn thành nhiệm vụ"; đã có dòng thì điền năm và xếp loại còn trống theo thứ tự 2023 → 2024 → 2025.
+- Menu xổ xuống không có lựa chọn nào (danh mục chưa tải): tiện ích tự tải lại trang, chờ trang tải xong rồi làm lại đúng mục đó (tối đa 1 lần cho mỗi mục), sau đó chạy tiếp.
+- Menu có lựa chọn nhưng không khớp giá trị cần điền: ở các mục bảng B2–B10 và B9, tiện ích chọn mục đầu tiên của menu (nếu có) và ghi rõ trong báo cáo + danh sách rà soát. B1 giữ nguyên (báo lỗi, không tự chọn).
+
+--- v0.8.9.8 ---
+- B8 Quan hệ gia đình: ô "Là đảng viên" không được nói tới (đám mây để trống, hoặc AI phân vân) thì tự chọn "Không" và ghi vào danh sách rà soát loại "Tự chọn mặc định". Ô trên trang đã có dữ liệu thì giữ nguyên; hồ sơ "Văn bản viết tay" vẫn hỏi người dùng.
+- B8 "Quan hệ": menu xổ xuống chưa có lựa chọn nào thì chờ thêm 2,5 giây rồi thử lại 1 lần trong cùng biểu mẫu; vẫn trống thì dừng cả mục, KHÔNG bấm Lưu (tránh lưu thiếu ô bắt buộc), tải lại trang rồi làm lại mục B8 (tối đa 2 lần tải lại cho B8, các mục khác 1 lần như cũ).
+- Ô "Là đảng viên" (B8): nếu menu đã mở nhưng danh mục chưa hiện, tiện ích chờ tối đa 5 giây cho "Có"/"Không" hiện ra rồi mới chọn (không chọn sớm khi danh sách còn trống).
+- Thêm ô "▶ Chạy từ bước" trong mục Chạy tự động: chọn mục bắt đầu (mặc định B1 Thông tin cơ bản) rồi bấm "▶ Bắt đầu chạy tự động" để chạy từ mục đó tới B10; lựa chọn được nhớ cho lần sau.
+- B8 Quan hệ gia đình: thêm nút "🔍 Lọc trùng (Họ và tên + Năm sinh)". Trùng cả họ tên (không phân biệt hoa/thường, khoảng trắng) và năm sinh thì hiện danh sách nhóm trùng (dòng nào giữ, dòng nào xóa); bấm OK để xóa các dòng trùng (giữ dòng đầu mỗi nhóm), Cancel để giữ nguyên. Không trùng thì chỉ báo "Không có dòng trùng".
+- B8 Quan hệ gia đình: thêm nút "⬆ Cập nhật người thân ĐÃ CÓ trên trang (ghi đè, không Thêm mới)". Chỉ sửa những dòng đã có trên bảng, ô nào trên trang khác file thì lấy theo file; dòng chưa có trên trang thì bỏ qua (không bấm "Thêm mới"). Vẫn dừng sau mỗi dòng để anh/chị kiểm tra rồi bấm "Lưu thông tin".
+- B8 Quan hệ gia đình (thay nút "Cập nhật" cũ): chọn chế độ SỬA người thân đã có trên trang / THÊM MỚI người chưa có / CẢ HAI → bấm "👁 Đối chiếu trang & hiện danh sách chọn" để xem danh sách người thân (tag "đã có trên trang – sẽ SỬA" / "chưa có – sẽ THÊM MỚI") và tick chọn từng người; bên dưới là "Tổng quan thông tin sẽ điền" (đã áp mặc định B8). Dòng không hợp chế độ đang chọn bị bỏ tick. Bấm "✔ OK – điền & lưu MỘT MẠCH" để tự điền và tự bấm Lưu từng người, KHÔNG dừng hỏi; kết quả (đã lưu / đã thay dữ liệu cũ / đã điền ô trống / bỏ qua / lỗi) hiện ngay dưới nút.
+- Thêm nút "📋 Điền theo mẫu (B2 → B10)" trong mục Chạy tự động: điền đúng các DÒNG đã tick ở từng mục (B2 Công tác → B10 Mạng xã hội; bỏ qua B1/B6/B9 vì là biểu mẫu ô, không phải dòng), mỗi dòng mở ra điền rồi CHỜ anh/chị bấm "Lưu thông tin"; quá 10 giây chưa bấm thì tiện ích tự bấm Lưu hộ rồi sang dòng kế tiếp (bỏ tick ô "⏱ Điền theo mẫu: sau 10 giây…" nếu muốn chờ vô hạn). Kèm ô "Chế độ điền": Cả hai / Chỉ SỬA dòng đã có trên trang / Chỉ THÊM MỚI dòng chưa có. Lựa chọn chế độ được nhớ cho lần sau.
+
+--- v0.8.9.8: Nạp hồ sơ hiện luôn popup các trường AI chưa chắc kèm textbox sửa luôn (sửa xong bấm Xong). Chạy tự động bỏ qua 4 trường: Số lý lịch, Phân loại đối tượng, Tổ chức đảng đang sinh hoạt, số CMND cũ. B5 Đánh giá mặc định 2023/2024/2025 - Hoàn thành tốt nhiệm vụ. B8: Là đảng viên trống/phân vân -> Không, kiểm tra đã điền mới làm tiếp; ưu tiên Sửa dòng đã có (khớp Họ tên + năm sinh), chỉ Thêm mới khi tên+năm sinh đều không có trong đám mây.
+
+--- v0.8.9.9: Loi LUU tung buoc duoc gom lai (khong mat khi sang buoc khac, nho ca khi panel tai lai), cuoi chay co Tong ket muc luu loi cua tat ca cac buoc + tai CSV + nut da xu ly.
+
+--- v0.8.9.9 (B8): Bo nut Dien thu cong; them nut Tat ca thanh vien tren trang (chon 40/trang roi gom het, danh dau dong trung dam may); nut Loc trung ngay doi Ho ten cac dong trung thanh Da xoa ngay tren trang.

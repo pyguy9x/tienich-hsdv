@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cây dữ liệu đám mây – sửa trực tiếp (tiện ích v0.8.9.5)</title>
+<style>
+  :root { --do:#b91c1c; --xanh:#15803d; --vang:#b45309; --nen:#f8fafc; --vien:#d1d5db; --chu:#1f2937; --mo:#6b7280; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.45 "Segoe UI",Arial,sans-serif; background:var(--nen); color:var(--chu); }
+  header { background:linear-gradient(90deg,#4c1d95,#7c3aed); color:#fff; padding:14px 20px; }
+  header h1 { margin:0; font-size:20px; }
+  header p { margin:2px 0 0; font-size:12px; opacity:.92; }
+  main { max-width:1400px; margin:0 auto; padding:14px; }
+  .the { background:#fff; border:1px solid var(--vien); border-radius:10px; padding:12px 14px; margin-bottom:12px; }
+  .hang { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  input, select, button { font:inherit; padding:6px 9px; border:1px solid var(--vien); border-radius:6px; background:#fff; }
+  button { cursor:pointer; font-weight:600; }
+  button.chinh { background:var(--do); border-color:var(--do); color:#fff; }
+  button.xanh { background:var(--xanh); border-color:var(--xanh); color:#fff; }
+  button.nho { padding:3px 8px; font-size:12px; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  .hs { background:#fff; border:1px solid var(--vien); border-radius:10px; margin-bottom:10px; }
+  .hs > .dau { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:10px 12px; }
+  .hs > .than { border-top:1px solid var(--vien); padding:10px 14px; }
+  .nhan { display:inline-block; padding:1px 7px; border-radius:10px; font-size:12px; font-weight:600; white-space:nowrap; }
+  .nhan.chua { background:#e5e7eb; color:#374151; } .nhan.tu { background:#fef3c7; color:#92400e; }
+  .nhan.xong { background:#dcfce7; color:#166534; }
+  .nhan.ban { background:#ede9fe; color:#5b21b6; }
+  .cay details { border-left:2px solid #e5e7eb; margin:2px 0 2px 8px; padding-left:8px; }
+  .cay summary { cursor:pointer; font-weight:600; padding:2px 0; }
+  .cay summary .dem { color:var(--mo); font-weight:400; font-size:12px; }
+  .la { display:flex; gap:6px; align-items:center; margin:3px 0; flex-wrap:wrap; }
+  .la > .k { font-family:Consolas,monospace; font-size:12.5px; color:#0f766e; min-width:140px; word-break:break-all; }
+  .la > input[type=text] { flex:1; min-width:180px; padding:3px 6px; font-size:12.5px; }
+  .la > textarea { flex:1; min-width:180px; min-height:44px; padding:3px 6px; font:12.5px/1.4 Consolas,monospace; }
+  .kieu { font-size:10.5px; color:var(--mo); border:1px solid var(--vien); border-radius:4px; padding:0 4px; white-space:nowrap; }
+  .kieu.null { color:var(--do); border-color:#fca5a5; }
+  .kieu.doi { color:var(--vang); border-color:#fcd34d; }
+  .nutXoa { color:var(--do); border-color:#fca5a5; padding:1px 7px; font-size:11.5px; }
+  .themKhoa { display:flex; gap:6px; margin:6px 0; align-items:center; }
+  .themKhoa input { padding:3px 6px; font-size:12px; }
+  .thongbao { padding:8px 12px; border-radius:6px; margin:8px 0; font-size:13px; }
+  .thongbao.ok { background:#dcfce7; color:#166534; } .thongbao.loi { background:#fee2e2; color:#991b1b; } .thongbao.warn { background:#fef3c7; color:#92400e; }
+  .mo { color:var(--mo); font-size:12px; }
+  .luu { font-weight:700; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Cây dữ liệu đám mây – sửa trực tiếp</h1>
+  <p>Mỗi hồ sơ hiện toàn bộ dữ liệu dạng cây, bấm vào khóa để sửa, bấm <b>Lưu hồ sơ</b> để ghi lên đám mây. Nút Hoàn tác tải lại dữ liệu gốc.</p>
+</header>
+<main>
+  <div class="the">
+    <div class="hang">
+      <input id="secret" type="password" placeholder="Mã bí mật cơ sở dữ liệu" style="width:230px">
+      <button class="chinh" id="tai">⟳ Tải toàn bộ dữ liệu</button>
+      <input id="tim" placeholder="Tìm theo tên, CCCD, mã…" style="flex:1;min-width:220px">
+      <span class="mo" id="lanTai"></span>
+    </div>
+    <div id="tb"></div>
+  </div>
+  <div id="khuDs"></div>
+</main>
+<script src="cay.js"></script>
+</body>
+</html>

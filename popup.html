@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><link rel="stylesheet" href="popup.css"></head>
+<body>
+<header>Điền hồ sơ đảng viên <span>Bước 1–10 – nhập từ Excel hoặc đám mây · v0.8.9.9</span></header>
+<div id="dieuKhien" hidden>
+  <div id="dkTT" class="tt">Đang điền…</div>
+  <div class="btns">
+    <button id="tamDung">❚❚ Tạm dừng</button>
+    <button id="dungHan">■ Dừng hẳn</button>
+  </div>
+</div>
+<main>
+  <!-- Mục nhập từ file Excel đang ẩn; muốn mở lại, bỏ thuộc tính hidden ở thẻ section kế tiếp -->
+  <section id="khuExcel" hidden>
+    <div class="btns">
+      <button id="nhap" class="primary">Nhập từ file Excel</button>
+      <a id="mau" class="btn" href="Mau_nhap_ho_so_dang_vien.xlsx" download>Tải file mẫu</a>
+    </div>
+    <input id="tep" type="file" accept=".xlsx,.xls" hidden>
+    <div id="tha">hoặc kéo thả file Excel vào đây</div>
+    <div id="tt" class="tt">Chưa nhập dữ liệu.</div>
+  </section>
+
+  <section>
+    <div class="btns">
+      <button id="taiMay" class="primary">☁ Tải dữ liệu đã lưu</button>
+    </div>
+    <details id="caiMay">
+      <summary>Cài đặt đám mây <small>(mã bí mật)</small></summary>
+      <label>Mã bí mật (secret) cơ sở dữ liệu</label>
+      <div class="row"><input id="fbSecret" type="password" class="o-may" placeholder="Do quản trị viên cung cấp"></div>
+      <p class="note">Đã tích hợp sẵn mã bí mật; chỉ nhập lại nếu cần đổi.</p>
+    </details>
+    <div id="khuMay" hidden>
+      <div class="row" style="margin:6px 0">
+        <input id="locMay" class="o-may" placeholder="Tìm theo tên, CCCD, ID, người nhập…">
+      </div>
+      <label class="chk"><input type="checkbox" id="chonHetMay"> Chọn tất cả (đang hiện)</label>
+      <label class="chk"><input type="checkbox" id="hienDaNhap"> Hiện cả hồ sơ đã nhập tự động</label>
+      <div id="dsMay" class="ds-may"></div>
+      <div class="btns">
+        <button id="napMay" class="primary" disabled>Nạp 0 hồ sơ đã chọn</button>
+      </div>
+    </div>
+    <!-- v0.8.9.7: ẩn 4 nút trang phụ (Xem rà soát / Cây dữ liệu / Chuẩn hóa / Quản lý).
+         Muốn mở lại: bỏ thuộc tính hidden ở các div bên dưới. -->
+    <div class="btns" style="margin-top:6px" hidden><button id="xemRaSoat" class="xanh full">📋 Xem rà soát</button></div>
+    <div class="btns" style="margin-top:4px" hidden><button id="moCay" class="xanh full">🌳 Xem cây dữ liệu đám mây (sửa trực tiếp)</button></div>
+    <div class="btns" style="margin-top:4px" hidden><button id="moChuanHoa" class="xanh full">🧹 Xem &amp; Chuẩn hóa dữ liệu đám mây (Tỉnh/Xã)</button></div>
+    <div class="btns" style="margin-top:4px" hidden><button id="moQuanLy" class="xanh full">🗂 Mở trang quản lý hồ sơ &amp; rà soát</button></div>
+    <div class="btns" style="margin-top:4px"><button id="moSoSanh" class="xanh full">⇄ So sánh: Trang web – Đám mây – Sửa</button></div>
+    <div id="ttMay" class="tt"></div>
+    <div id="khuRaSoat" hidden></div>
+  </section>
+
+  <section>
+    <label>Hồ sơ</label>
+    <div class="row">
+      <button id="truoc" class="nho" title="Hồ sơ trước">‹</button>
+      <select id="ds" disabled><option>— Chưa có dữ liệu —</option></select>
+      <button id="sau" class="nho" title="Hồ sơ sau">›</button>
+    </div>
+    <div id="xem" class="xem"></div>
+    <!-- v0.8.9.7: ẩn 3 nút nhập tay / đọc trang. Muốn mở lại: bỏ thuộc tính hidden. -->
+    <div class="btns" hidden><button id="taoTay" class="full">＋ Tạo hồ sơ nhập tay B1→B11</button></div>
+    <div class="btns" hidden><button id="docTrang" class="full">📥 Đọc từ trang vào để soát</button></div>
+    <div class="btns" hidden><button id="docHet" class="full">📥 Đọc hết B1→B10 một lần (chỉ đọc)</button></div>
+    <p class="note" hidden>Nhập tay: bấm tạo hồ sơ → bấm đọc từ trang để lấy B1→B10 vào soát ở Tổng quan (B11 hệ thống tự ghi) → bấm Chạy tự động.</p>
+    <label class="chk"><input type="checkbox" id="vietTay"> ✍ Văn bản viết tay – vẫn chạy tự động như thường, nhưng gặp ô AI cân nhắc/không rõ thì dừng hỏi xác nhận (sửa được giá trị). Chữ đánh máy: chạy tự động không hỏi.</label>
+    <label class="chk"><input type="checkbox" id="tuDong" checked> Bước 1: sau khi bấm Lưu thì chuyển hồ sơ kế tiếp và tự so sánh khi mở trang mới</label>
+  </section>
+
+  <section id="khuTD" hidden>
+    <details id="khuTuDong" open>
+      <summary>▶ Chạy tự động B1 → B10 <small>(tự điền, tự bấm Lưu từng mục)</small></summary>
+      <div class="btns"><button id="chayTD" class="primary">▶ Bắt đầu chạy tự động</button></div>
+      <div class="row" style="margin:4px 0 6px"><span style="white-space:nowrap">▶ Chạy từ bước</span><select id="tuMuc"></select></div>
+      <div style="margin:4px 0 6px"><span>Chỉ chạy các mục đã tick (B2 → B10):</span><div id="tdChonMuc" class="btns"></div></div>
+      <div class="row" style="margin:4px 0 6px"><span style="white-space:nowrap">Chế độ điền</span><select id="tdCheDo">
+        <option value="ca">Cả hai: sửa dòng đã có + thêm dòng chưa có</option>
+        <option value="sua">Chỉ SỬA dòng đã có trên trang</option>
+        <option value="them">Chỉ THÊM MỚI dòng chưa có</option>
+      </select></div>
+      <div class="btns"><button id="chayMau" class="primary">📋 Điền theo mẫu (B2 → B10)</button></div>
+      <label class="chk"><input type="checkbox" id="tdTuLuu10" checked> ⏱ Điền theo mẫu: sau 3 giây mình chưa bấm "Lưu thông tin" thì tiện ích tự bấm Lưu hộ rồi chạy tiếp (đang bấm thì thôi; đợi quá 10 giây bấm lại, lỗi quá 15 giây thì dừng).</label>
+      <label class="chk"><input type="checkbox" id="tdSuper"> Super – chạy tự động không hỏi gì cả, nghỉ 2 giây giữa mỗi lần lưu; gặp lỗi lớn thì báo và dừng hẳn.</label>
+      <label class="chk"><input type="checkbox" id="tdTuChay" checked> Tự chạy hồ sơ kế tiếp (chỉ sau khi đã bấm Bắt đầu chạy)</label>
+      <label class="chk"><input type="checkbox" id="tdBoQuaB1"> ⏭ Bỏ qua Bước 1 (Thông tin cơ bản) khi chạy tự động – dùng khi B1 đã điền xong hoặc không cần điền (B1 chạy lâu nhất).</label>
+      <label class="chk"><input type="checkbox" id="tdHoiNghi"> (Tùy chọn, mặc định TẮT) B6, B9 và các mục danh sách trừ B8: ô AI chưa chắc đang có dữ liệu khác trên trang thì hiện hộp nhỏ chọn Giữ nguyên / Thay thế. B1 và B8 luôn điền thẳng.</label>
+      <label class="chk"><input type="checkbox" id="tdMacDinh" checked> Ô danh mục Quốc gia, Tỉnh, Xã/Phường (B1: nơi khai sinh, quê quán, thường trú) còn TRỐNG cả trên file lẫn trên trang thì chọn sẵn:</label>
+      <div class="row" style="margin:4px 0 6px;gap:4px"><input id="tdMdQG" value="Việt Nam" title="Quốc gia"><input id="tdMdTinh" value="Tỉnh Lào Cai" title="Tỉnh"><input id="tdMdXa" value="Xã Mậu A" title="Xã/Phường"></div>
+      <p class="note">Dữ liệu file/đám mây được coi là chuẩn: B1 điền toàn bộ, ô khác dữ liệu được thay, không hỏi từng ô. Tiện ích chỉ dừng hỏi khi họ tên/CCCD/ngày sinh trên trang khác dữ liệu (có thể mở nhầm hồ sơ). Trong lúc chạy, ô AI chưa chắc được tô đỏ; chạy xong hồ sơ, ghi chú trên trang được xóa và chuyển vào "Danh sách rà soát".</p>
+      <div id="tdTT" class="tt"></div>
+      <button id="tdBoQua" class="full" hidden>↷ Bỏ qua mục này, chạy tiếp</button>
+      <div id="tdBC"></div>
+      <div id="tdRaSoat"></div>
+      <div id="tdCuoi" hidden>
+        <button id="tdDong" class="primary full">✔ Xác nhận hoàn tất – Đóng hồ sơ</button>
+      </div>
+    </details>
+  </section>
+
+  <section id="khuTongQuan" hidden>
+    <details id="tongQuan" open>
+      <summary>Tổng quan dữ liệu chuẩn bị điền <small>(sửa trực tiếp nếu chưa đúng)</small></summary>
+      <div id="tqTomTat" class="tt"></div>
+      <div id="thieu" class="thieu"></div>
+      <div id="tqNoiDung"></div>
+    </details>
+  </section>
+
+  <section id="khuBuoc" hidden>
+    <div class="tabs">
+      <button class="tab on" data-buoc="b1">B1 Cơ bản</button>
+      <button class="tab" data-buoc="qtct">B2 Công tác</button>
+      <button class="tab" data-buoc="daotao">B3 Đào tạo</button>
+      <button class="tab" data-buoc="huyhieu">B4 Huy hiệu</button>
+      <button class="tab" data-buoc="khenthuong">B5 Khen thưởng</button>
+      <button class="tab" data-buoc="danhgia">B5 Đánh giá</button>
+      <button class="tab" data-buoc="kyluat">B5 Kỷ luật</button>
+      <button class="tab" data-buoc="dd">B6 Lịch sử</button>
+      <button class="tab" data-buoc="nuocngoai">B7 Nước ngoài</button>
+      <button class="tab" data-buoc="qh">B8 Gia đình</button>
+      <button class="tab" data-buoc="kt">B9 Kinh tế</button>
+      <button class="tab" data-buoc="mxh">B10 Mạng XH</button>
+    </div>
+    <p class="note">Mở đúng mục tương ứng của hồ sơ trên trang rồi bấm So sánh.</p>
+
+    <div class="panel" id="p_b1">
+      <button id="soSanh" class="primary full" disabled>So sánh B1 với dữ liệu trên trang</button>
+      <div id="canhBao"></div>
+      <div id="tomTat"></div>
+      <div id="bangSS"></div>
+      <div id="khuDien" hidden>
+        <button id="dien" class="primary full">Điền các ô đã chọn</button>
+        <div id="tienDo" class="tt"></div>
+        <div id="kq"></div>
+      </div>
+    </div>
+    <div class="panel" id="p_qtct" hidden></div>
+    <div class="panel" id="p_qh" hidden></div>
+    <div class="panel" id="p_daotao" hidden></div>
+    <div class="panel" id="p_huyhieu" hidden></div>
+    <div class="panel" id="p_khenthuong" hidden></div>
+    <div class="panel" id="p_danhgia" hidden></div>
+    <div class="panel" id="p_kyluat" hidden></div>
+    <div class="panel" id="p_dd" hidden></div>
+    <div class="panel" id="p_nuocngoai" hidden></div>
+    <div class="panel" id="p_mxh" hidden></div>
+    <button id="dayTrang" class="primary full">⬆ Đẩy hồ sơ sang trang đang mở</button>
+    <p class="note">B11 Quá trình sinh hoạt Đảng do hệ thống tự ghi (không có nút Thêm mới) – không cần điền.</p>
+    <div class="panel" id="p_kt" hidden>
+      <button id="ktSoSanh" class="full">So sánh B9 với dữ liệu trên trang</button>
+      <div id="ktTT" class="tt"></div>
+      <div id="ktBang"></div>
+      <button id="ktDien" class="primary full" disabled>Điền các ô đã chọn</button>
+      <div id="ktKq"></div>
+    </div>
+  </section>
+
+  <p class="note">Chế độ từng mục (các thẻ B1…B10 ở trên): ô đã có dữ liệu trên trang chỉ được thay khi anh/chị xác nhận (B1, B6); ở các mục danh sách và B9 chỉ điền ô còn trống; anh/chị tự bấm Lưu. Chế độ "Chạy tự động" thay dữ liệu cũ và tự bấm Lưu.</p>
+</main>
+<div id="qhModal" hidden>
+  <div id="qhBox2">
+    <b id="qhTieuDe">👥 Thành viên trên trang</b>
+    <div id="qhDsTv"></div>
+    <div class="btns"><button id="qhLocNgay" class="primary">🧹 Lọc trùng ngay (Họ tên + (X))</button><button id="qhBoSung" class="primary">➕ Bổ sung từ đám mây (chỉ thêm dòng thiếu)</button><button id="qhDongModal">Đóng</button></div>
+  </div>
+</div>
+<div id="nghiModal" hidden>
+  <div id="nghiBox">
+    <b id="nghiTieuDe">⚠ Trường AI chưa chắc – sửa trước khi chạy</b>
+    <div id="nghiDs"></div>
+    <div class="btns"><button id="nghiXong" class="primary">✔ Xong – đóng và chạy tiếp</button></div>
+  </div>
+</div>
+<script src="xlsx.mini.min.js"></script>
+<script src="fields.js"></script>
+<script src="popup.js"></script>
+</body></html>

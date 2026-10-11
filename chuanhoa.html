@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xem &amp; Chuẩn hóa dữ liệu đám mây (tiện ích v0.8.9.5)</title>
+<style>
+  :root { --do:#b91c1c; --xanh:#15803d; --vang:#b45309; --nen:#f8fafc; --vien:#d1d5db; --chu:#1f2937; --mo:#6b7280; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.45 "Segoe UI",Arial,sans-serif; background:var(--nen); color:var(--chu); }
+  header { background:linear-gradient(90deg,#0f766e,#0891b2); color:#fff; padding:14px 20px; }
+  header h1 { margin:0; font-size:20px; }
+  header p { margin:2px 0 0; font-size:12px; opacity:.92; }
+  main { max-width:1600px; margin:0 auto; padding:14px; }
+  .the { background:#fff; border:1px solid var(--vien); border-radius:10px; padding:12px 14px; margin-bottom:12px; }
+  .hang { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  input, select, textarea, button { font:inherit; padding:6px 9px; border:1px solid var(--vien); border-radius:6px; background:#fff; }
+  textarea { width:100%; min-height:150px; font:12px/1.4 Consolas,monospace; }
+  button { cursor:pointer; font-weight:600; }
+  button.chinh { background:var(--do); border-color:var(--do); color:#fff; }
+  button.xanh { background:var(--xanh); border-color:var(--xanh); color:#fff; }
+  button.nho { padding:3px 8px; font-size:12px; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  .tong { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; margin-bottom:12px; }
+  .o { background:#fff; border:1px solid var(--vien); border-radius:10px; padding:10px 12px; }
+  .o b { display:block; font-size:22px; }
+  .o span { font-size:12px; color:var(--mo); }
+  .o.can b { color:var(--do); } .o.tot b { color:var(--xanh); } .o.vang b { color:var(--vang); }
+  .tabs { display:flex; gap:4px; margin-bottom:10px; flex-wrap:wrap; }
+  .tabs button { border-radius:6px 6px 0 0; }
+  .tabs button.on { background:#0f766e; border-color:#0f766e; color:#fff; }
+  table { width:100%; border-collapse:collapse; background:#fff; }
+  th, td { border:1px solid var(--vien); padding:5px 7px; text-align:left; vertical-align:top; font-size:12.5px; }
+  th { background:#f1f5f9; position:sticky; top:0; z-index:1; white-space:nowrap; }
+  .cuoi { max-height:560px; overflow:auto; border:1px solid var(--vien); border-radius:8px; }
+  .nghi { color:var(--do); font-weight:600; }
+  .doi { text-decoration:line-through; color:#9ca3af; }
+  .moi { color:var(--xanh); font-weight:600; }
+  .goiy { color:var(--vang); font-weight:600; }
+  .thongbao { padding:8px 12px; border-radius:6px; margin:8px 0; font-size:13px; }
+  .thongbao.ok { background:#dcfce7; color:#166534; } .thongbao.loi { background:#fee2e2; color:#991b1b; } .thongbao.warn { background:#fef3c7; color:#92400e; }
+  .mo { color:var(--mo); font-size:12px; }
+  .moiNho { color:#166534; font-weight:600; } .cuNho { color:#9ca3af; }
+  .chi { width:100%; padding:2px 4px; font-size:12px; }
+  pre { background:#0f172a; color:#e2e8f0; padding:10px; border-radius:8px; overflow:auto; max-height:460px; font:12px/1.4 Consolas,monospace; }
+  code.k { color:#7dd3fc; }
+  @media (max-width:900px){ th:nth-child(n+5), td:nth-child(n+5){ display:none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Xem &amp; Chuẩn hóa dữ liệu đám mây</h1>
+  <p>Xem toàn bộ dữ liệu Firebase, chuẩn hóa Tỉnh/Xã (vd “Lào Cai” → “Tỉnh Lào Cai”, “Mậu A” → “Xã Mậu A”). Những gì AI không chắc sẽ nằm ở cột <b>AI nghi ngờ về chính tả</b> để anh/chị tự xem và sửa.</p>
+</header>
+<main>
+  <div class="the">
+    <div class="hang">
+      <input id="secret" type="password" placeholder="Mã bí mật cơ sở dữ liệu" style="width:230px">
+      <button class="chinh" id="tai">⟳ Tải toàn bộ dữ liệu</button>
+      <button id="quet">🧹 Chuẩn hóa (xem trước)</button>
+      <button class="xanh" id="luu" disabled>💾 Ghi thay đổi lên đám mây</button>
+      <button id="boLuu" disabled>↩ Bỏ thay đổi</button>
+      <span class="mo" id="lanTai"></span>
+    </div>
+    <div id="tb"></div>
+    <p class="mo">Chuẩn hóa KHÔNG tự ghi lên đám mây. Bấm “Chuẩn hóa (xem trước)” để xem bảng đối chiếu, sau đó mới bấm “Ghi thay đổi”.</p>
+  </div>
+
+  <div class="tong" id="tong"></div>
+
+  <div class="tabs">
+    <button data-tab="tx" class="on">Tỉnh – Xã / AI nghi ngờ</button>
+    <button data-tab="nghi">⚠ Trường AI nghi ngờ → sửa lên đám mây</button>
+    <button data-tab="kiemtra">📅 Tên – Ngày – CCCD sai định dạng</button>
+    <button data-tab="tudien">Từ điển Tỉnh – Xã</button>
+    <button data-tab="tatca">Tất cả dữ liệu</button>
+    <button data-tab="ai">Kết nối AI</button>
+    <button data-tab="cauTruc">Cấu trúc đám mây</button>
+  </div>
+
+  <div class="the">
+    <div class="hang">
+      <input id="tim" placeholder="Tìm theo tên, CCCD, mã…" style="flex:1;min-width:220px">
+      <select id="loc">
+        <option value="">Mọi hồ sơ</option>
+        <option value="nghi">Chỉ hồ sơ có ô AI nghi ngờ</option>
+        <option value="doi">Chỉ hồ sơ sẽ được chuẩn hóa</option>
+        <option value="sach">Chỉ hồ sơ đã đúng chuẩn</option>
+      </select>
+      <label><input type="checkbox" id="chiDo" checked> Chỉ hiện nhóm Tỉnh/Xã có dữ liệu đang đổi hoặc AI nghi ngờ</label>
+    </div>
+  </div>
+
+  <div id="khuTx"></div>
+  <div id="khuNghi" hidden></div>
+  <div id="khuKiemTra" hidden></div>
+  <div id="khuTudien" hidden></div>
+  <div id="khuTatca" hidden></div>
+  <div id="khuAi" hidden></div>
+  <div id="khuCauTruc" hidden></div>
+</main>
+<script src="fields.js"></script>
+<script src="chuanhoa.js"></script>
+</body>
+</html>

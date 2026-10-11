@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>So sánh Trang web – Đám mây – Sửa (tiện ích v0.8.9)</title>
+<style>
+:root { --do:#b91c1c; --xanh:#15803d; --nen:#f8fafc; --vien:#d1d5db; --chu:#1f2937; --mo:#6b7280; }
+* { box-sizing: border-box; }
+body { margin:0; font:14px/1.45 "Segoe UI",Arial,sans-serif; background:var(--nen); color:var(--chu); }
+header { background:linear-gradient(90deg,#b91c1c,#dc2626); color:#fff; padding:12px 18px; }
+header h1 { margin:0; font-size:19px; }
+header p { margin:2px 0 0; font-size:12px; opacity:.9; }
+main { display:flex; gap:12px; padding:12px; max-width:1600px; margin:0 auto; align-items:flex-start; }
+#trai { width:300px; flex:none; background:#fff; border:1px solid var(--vien); border-radius:10px; padding:10px; position:sticky; top:12px; max-height:calc(100vh - 24px); overflow:auto; }
+#phai { flex:1; min-width:0; }
+.the { background:#fff; border:1px solid var(--vien); border-radius:10px; padding:12px 14px; margin-bottom:12px; }
+.hang { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+input, select, button, textarea { font:inherit; padding:6px 9px; border:1px solid var(--vien); border-radius:6px; background:#fff; }
+button { cursor:pointer; font-weight:600; }
+button.chinh { background:var(--do); border-color:var(--do); color:#fff; }
+button.xanh { background:var(--xanh); border-color:var(--xanh); color:#fff; }
+button.nho { padding:2px 7px; font-size:12px; font-weight:400; }
+button:disabled { opacity:.5; cursor:not-allowed; }
+.hs { padding:6px 8px; border-radius:6px; cursor:pointer; border:1px solid transparent; }
+.hs:hover { background:#fef2f2; }
+.hs.on { background:#fee2e2; border-color:var(--do); font-weight:700; }
+.hs small { display:block; color:var(--mo); font-weight:400; }
+.tabs { display:flex; gap:4px; flex-wrap:wrap; margin:10px 0; }
+.tabs button.on { background:var(--do); color:#fff; border-color:var(--do); }
+table.ss { width:100%; border-collapse:collapse; }
+.ss th, .ss td { border:1px solid var(--vien); padding:5px 7px; text-align:left; vertical-align:top; }
+.ss th { background:#f1f5f9; }
+.ss td.goc { background:#f8fafc; max-width:280px; word-break:break-word; }
+.ss td.may { max-width:280px; word-break:break-word; }
+.ss input.sua { width:100%; }
+tr.khac td.goc, tr.khac td.may { background:#fef9c3; }
+tr.khac td:first-child { border-left:4px solid #ca8a04; }
+.dongmoi { background:#f0fdf4; }
+.thongbao { padding:8px 10px; border-radius:6px; margin:6px 0; }
+.thongbao.ok { background:#dcfce7; color:#166534; }
+.thongbao.loi { background:#fee2e2; color:#991b1b; }
+.mo { color:var(--mo); font-size:12px; }
+pre.bangtrang { background:#f8fafc; border:1px solid var(--vien); border-radius:6px; padding:8px; max-height:220px; overflow:auto; font-size:12px; white-space:pre-wrap; }
+</style>
+</head>
+<body>
+<header>
+<h1>So sánh: Trang web – Đám mây – Sửa</h1>
+<p>Mở hồ sơ trên tcxdd.dcs.vn rồi bấm “Đọc trang web” từng mục để đối chiếu với đám mây. Cột “Sửa” mặc định lấy theo đám mây, sửa xong bấm “Lưu mục này lên mây”.</p>
+</header>
+<main>
+<div id="trai">
+<div class="hang" style="margin-bottom:8px">
+<input id="secret" type="password" placeholder="Mã bí mật" style="flex:1;min-width:0">
+<button id="tai" class="chinh nho">Tải hồ sơ</button>
+</div>
+<input id="tim" placeholder="Tìm tên / CCCD / mã…" style="width:100%;margin-bottom:8px">
+<div id="lanTai" class="mo"></div>
+<div id="ds"></div>
+</div>
+<div id="phai">
+<div id="tb"></div>
+<div class="the" id="khuHoSo" hidden>
+<div class="hang"><b id="tenHs" style="font-size:16px"></b><span id="ttHs" class="mo"></span></div>
+<div class="tabs" id="tabs"></div>
+<div id="khuMuc"></div>
+</div>
+<div class="the mo" id="khuRong">Nhập mã bí mật rồi bấm “Tải hồ sơ”, chọn một hồ sơ để so sánh.</div>
+</div>
+</main>
+<script src="fields.js"></script>
+<script src="sosanh.js"></script>
+</body>
+</html>
