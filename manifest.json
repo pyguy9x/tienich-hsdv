@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Điền hồ sơ đảng viên (thử nghiệm)-pickle",
-  "version": "0.8.9.9",
+  "version": "0.9.0",
   "description": "Điền tự động hồ sơ đảng viên từ Excel hoặc dữ liệu đã lưu trên đám mây: bước 1–10 (B11 do hệ thống tự ghi) – Hệ thống CSDL Đảng viên.",
   "permissions": [
     "scripting",

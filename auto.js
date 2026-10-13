@@ -14,7 +14,11 @@
   const coBang = (b) => () => {
     const c = (window.CAU_HINH_DS || {})[b];
     if (!c) return false;
-    return qa("table").filter(hien).some((t) => c.bang.every((h) => qa("thead th", t).some((th) => chuan(th.innerText) === h)));
+    return qa("table").filter(hien).some((t) => {
+      const hs = qa("thead th", t).map((th) => chuan(th.innerText));
+      if (c.khoaBang) return c.khoaBang.every((ks) => hs.some((h) => [].concat(ks).some((k) => h.includes(k))));
+      return c.bang.every((h) => hs.some((th) => th === h));
+    });
   };
   const coTab = (ten) => () => qa(".vts-tabs-tab-btn").filter(hien).some((e) => chuan(e.innerText) === ten);
   const coO = (key) => () => hien(L.host(key)) || hien(q(`[formcontrolname="${key}"] input`));

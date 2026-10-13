@@ -81,6 +81,11 @@
       chuanHoa: (x) => ({ ...x, fromDate: x.fromDate ? thangChuan(x.fromDate) : x.fromDate, toDate: x.toDate ? thangChuan(x.toDate) : x.toDate }),
       nhan: (x) => `${x.fromDate || "?"}${x.toDate ? " – " + x.toDate : ""}: ${x.companyName || x.companyPosition || ""}`,
       dong: (o) => ({ thoiGian: o["thời gian"], toChuc: o["tên tổ chức"] }),
+      khoaBang: ["thời gian", ["tổ chức", "cơ quan", "đơn vị"]],
+      dongMoi: (o) => {
+        const lay = (ks) => { const k = Object.keys(o).find((x) => [].concat(ks).some((y) => x.includes(y))); return k ? o[k] : ""; };
+        return { thoiGian: lay("thời gian"), toChuc: lay(["tổ chức", "cơ quan", "đơn vị"]) };
+      },
       khop3: (r, x) => !!x.fromDate && chuan(r.thoiGian).indexOf(chuan(x.fromDate)) === 0 && giongLo(r.toChuc, x.companyName || ""),
       khop: (r, x) => !!x.fromDate && chuan(r.thoiGian).startsWith(chuan(x.fromDate)) && chuan(r.toChuc) === chuan(x.companyName),
       khop2: (r, x) => !!x.fromDate && !!x.toDate && chuan(r.thoiGian).replace(/\s/g, "") === chuan(`${x.fromDate}-${x.toDate}`),
@@ -100,7 +105,7 @@
       khop2: () => false,
     };
   }
-  window.CAU_HINH_DS = Object.fromEntries(Object.entries(CAU_HINH).map(([k, v]) => [k, { ten: v.ten, truong: v.truong, bang: v.bang, tab: v.tab, formKey: v.formKey }]));
+  window.CAU_HINH_DS = Object.fromEntries(Object.entries(CAU_HINH).map(([k, v]) => [k, { ten: v.ten, truong: v.truong, bang: v.bang, khoaBang: v.khoaBang, tab: v.tab, formKey: v.formKey }]));
 
   const nut = (re) => qa("button").find((b) => re.test(chuan(b.innerText)));
 
@@ -177,7 +182,13 @@
   }
 
   function docBang(ch) {
-    const thay = (x) => ch.bang.every((b) => qa("thead th", x).some((th) => chuan(th.innerText) === b));
+    const headsOf = (x) => qa("thead th", x).map((th) => chuan(th.innerText));
+    const thay = (x) => {
+      const hs = headsOf(x);
+      if (ch.khoaBang) return ch.khoaBang.every((ks) => hs.some((h) => [].concat(ks).some((k) => h.includes(k))));
+      return ch.bang.every((b) => hs.some((th) => th === b));
+    };
+    const dongCua = (o) => (ch.dongMoi ? ch.dongMoi(o) : ch.dong(o));
     const tables = qa("table");
     const t = tables.find((x) => x.offsetParent !== null && thay(x));
     if (!t && tables.some((x) => thay(x))) return { rows: [], coBang: false, anBang: true };
@@ -193,7 +204,7 @@
         const rows = qa("tr", tB).filter((tr) => tr.children.length > 3 && !ch.bang.every((b) => [...tr.children].some((c) => chuan(c.innerText || c.textContent) === b))).map((tr) => {
           const o = {};
           th.forEach((h, i) => { o[h] = tr.children[i]?.innerText.trim() || ""; });
-          return { tr, ...ch.dong(o) };
+          return { tr, ...dongCua(o) };
         });
         const trangSau = qa("vts-pagination li, .vts-pagination li").some((li) => /next/.test(li.className) && !/disabled/.test(li.className));
         return { rows, coBang: true, trangSau };
@@ -204,7 +215,7 @@
     const rows = qa("tbody tr", t).filter((tr) => tr.children.length > 3).map((tr) => {
       const o = {};
       th.forEach((h, i) => { o[h] = tr.children[i]?.innerText.trim() || ""; });
-      return { tr, ...ch.dong(o) };
+      return { tr, ...dongCua(o) };
     });
     const trangSau = qa("vts-pagination li, .vts-pagination li").some((li) => /next/.test(li.className) && !/disabled/.test(li.className));
     return { rows, coBang: true, trangSau };
@@ -462,6 +473,8 @@
   // opt (chế độ tự động): { tuLuu: tự bấm "Lưu thông tin", ghiDe: thay ô đã có dữ liệu khác, nghi: [{mã: lý do}] theo từng dòng }
   async function dienDSCore(buoc, ds, opt = {}) {
     const ch = CAU_HINH[buoc];
+    // B2: chỉ THÊM MỚI dòng chưa có; sửa thì dùng nút "Đẩy hồ sơ sang trang đang mở"
+    if (buoc === "qtct") { opt = { ...opt, chiThem: true }; delete opt.chiSua; }
     const coForm = () => !!q(`[formcontrolname="${ch.formKey}"]`);
     const A = () => window.__dhsAutoLib;
     const tong = [];
@@ -490,6 +503,37 @@
         }
         if (!(await cho(coForm, 8000))) throw new Error("biểu mẫu không mở được");
         await sleep(900);
+        // v0.9.0: mở hết trường trong biểu mẫu rồi mới đối chiếu (đặc biệt B8 nhiều trường ẩn/khó thấy)
+        // Kéo form vào giữa, chờ các ô select/text hiện đủ
+        try {
+          const fm = q(`[formcontrolname="${ch.formKey}"]`);
+          if (fm) { const dlg = fm.closest("form, .vts-modal-content, vts-modal-container") || fm; dlg.scrollIntoView({ block: "center" }); }
+        } catch (e) {}
+        await sleep(400);
+        const truongHien = ch.truong.filter(([key]) => !!q(`[formcontrolname="${key}"]`));
+        if ((opt.chiThem || opt.chiSua) && truongHien.length < ch.truong.length) {
+          // vẫn tiếp tục nhưng ghi chú để báo cáo biết form chưa mở hết
+          kq.o.push({ key: "__form", nhan: "Biểu mẫu", ok: true, hien: `thấy ${truongHien.length}/${ch.truong.length} trường – chỉ đối chiếu trường đang hiện`, tt: "trung" });
+        }
+        // v0.9.0 SỬA: đọc hết trường trên trang, đối chiếu đủ với đám mây rồi mới sửa
+        // - đám mây thiếu khóa định danh → bỏ qua, không sửa mù
+        // - trang đã trùng hết trường đám mây có → đóng lại, đánh "trung" (khỏi sửa)
+        if (dong && opt.chiSua) {
+          const khoaThieu = (window.DS_THEM && window.DS_THEM[buoc] && window.DS_THEM[buoc].truong.filter((t) => t[3]).map((t) => t[0]))
+            || (buoc === "qh" ? ["fullName"] : buoc === "qtct" ? ["fromDate"] : []);
+          const thieuKhoa = khoaThieu.filter((k) => !String(x[k] ?? "").trim());
+          if (thieuKhoa.length) { await dongForm(ch); kq.ketQua = "boQua"; kq.loi = `đám mây thiếu ${thieuKhoa.join(", ")} – không đủ cơ sở để SỬA`; tong.push(kq); continue; }
+          let trungHet = true;
+          for (const [key, , kieu] of ch.truong) {
+            const moi = String(x[key] ?? "").trim();
+            if (!moi) continue;
+            let cu = "";
+            try { cu = docO(key, kieu) || ""; } catch (e) { trungHet = false; break; }
+            if (cu == null) { trungHet = false; break; }
+            if (chuan(cu) !== chuan(moi)) { trungHet = false; break; }
+          }
+          if (trungHet) { await dongForm(ch); kq.ketQua = "trung"; tong.push(kq); continue; }
+        }
         const nghiDong = (opt.nghi && opt.nghi[i]) || {};
         if (opt.tuLuu && A()) A().danhDau({ form: nghiDong });
         const thuLai = new Set();

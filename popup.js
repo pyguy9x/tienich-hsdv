@@ -1315,7 +1315,8 @@ function hienPopupNghi() {
   const hang = (tieuDe, ten, gt, lyDo, datFn, xoaFn) => {
     tong++;
     const inp = el("input", { value: gt || "", title: lyDo });
-    inp.onchange = () => { const v = inp.value.trim(); datFn(v); if (v && v !== (gt || "")) { xoaFn(); inp.style.background = "#e6f4ea"; } luu(); veTongQuan(); veThieu(); };
+    // v0.9.0: sửa trong popup = sửa trực tiếp Tổng quan; đã chạm là coi như đã rà soát → xóa cờ nghi
+    inp.onchange = () => { const v = inp.value.trim(); datFn(v); try { xoaFn(); } catch (e) {} inp.style.background = "#e6f4ea"; luu(); veTongQuan(); veThieu(); };
     box.append(el("div", { className: "tq-o" }, el("span", { textContent: ten, title: lyDo }), inp));
   };
   hoSo.forEach((d) => {
@@ -1334,7 +1335,14 @@ function hienPopupNghi() {
   if (!tong) return;
   $("nghiTieuDe").textContent = `⚠ ${tong} trường AI chưa chắc – sửa luôn rồi bấm Xong (vẫn chạy tiếp nếu để nguyên)`;
   modal.hidden = false;
-  $("nghiXong").onclick = () => { modal.hidden = true; };
+  // v0.9.0: bấm Xong → đóng + ghi thẳng vào Tổng quan (sửa trực tiếp các trường chuẩn bị điền)
+  $("nghiXong").onclick = async () => {
+    modal.hidden = true;
+    try { await luu(); } catch (e) {}
+    try { veDanhSach(chiSo()); } catch (e) { try { veTongQuan(); veThieu(); } catch (e2) {} }
+    if ($("tongQuan")) $("tongQuan").open = true;
+    trangThai("tt", `Đã cập nhật ${tong} ô AI chưa chắc vào Tổng quan dữ liệu chuẩn bị điền. Kiểm tra lại ở Tổng quan rồi chạy tiếp.`, "ok");
+  };
 }
 
 // ================= CÒN THIẾU – CẦN BỔ SUNG =================
@@ -1532,11 +1540,23 @@ let cheDoSuper = false;
       const cb = document.createElement("input");
       cb.type = "checkbox"; cb.id = "tdMuc_" + m;
       cb.checked = (m in mucLuu) ? !!mucLuu[m] : true;
-      cb.onchange = ghi;
+      cb.onchange = () => { ghi(); demMau(); };
       lb.append(cb, document.createTextNode(" " + TEN_MUC[m]));
       kh.append(lb);
     });
   })();
+  // v0.9.0: group mẫu thu gọn – summary hiện số mục đã tick + chế độ điền
+  window.demMau = demMau;
+  function demMau() {
+    try {
+      const n = THU_TU.filter((m) => m !== "b1").filter((m) => { const c = $("tdMuc_" + m); return !c || c.checked; }).length;
+      const c = ($("tdCheDo") && $("tdCheDo").value) || "ca";
+      const ten = c === "sua" ? "SỬA" : c === "them" ? "THÊM MỚI" : "SỬA+THÊM";
+      if ($("tdMauDem")) $("tdMauDem").textContent = `– ${n} mục · ${ten}`;
+    } catch (e) {}
+  }
+  try { $("tdCheDo").addEventListener("change", demMau); } catch (e) {}
+  demMau();
   $("chayTD").onclick = () => { tdKichHoat = $("tdTuChay").checked; chayTuDong(); };
   $("chayMau").onclick = () => { tdKichHoat = $("tdTuChay").checked; ghi(); cheDoMau = true; chayTuDong(); };
   $("tdBoQua").onclick = () => tabDien && chay(tabDien, () => { window.__dhsBoQua = true; }).catch(() => {});

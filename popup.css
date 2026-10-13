@@ -112,6 +112,16 @@ button.xanh:hover{background:#166534}
 #nghiDs input{width:100%;padding:4px 6px;border:1px solid #dc2626;border-radius:4px;font:inherit;font-size:12px;background:#fef2f2}
 #nghiDs .nhs{font-weight:700;color:#1f2328;margin:8px 0 2px}
 
+/* v0.9.0 – gọn UI: section thành card, group mẫu thu gọn */
+main{padding:10px 12px;max-width:560px;margin:0 auto}
+section{background:#fff;border:1px solid #eee;border-radius:8px;padding:8px 10px;margin-bottom:8px}
+#khuTuDong{border:1px solid #f0c9ce;border-radius:8px;padding:6px 8px;background:#fffafa}
+#tdMauGroup{border:1px solid #e3e5e8;border-radius:6px;padding:4px 8px;margin:6px 0;background:#fcfcfd}
+#tdMauGroup>summary{color:#1f2328}
+#tdMauGroup .td-muc-chon{max-height:180px;overflow:auto;border:1px solid #eee;border-radius:6px;padding:4px 6px;margin:4px 0}
+#khuTongQuan details,#khuTuDong details{margin:4px 0}
+button{padding:7px 8px}
+.tt{margin:4px 0}
 /* v0.8.9.9 – popup tất cả thành viên B8 */
 #qhModal{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;display:flex;align-items:center;justify-content:center;padding:12px}
 #qhModal[hidden]{display:none !important}

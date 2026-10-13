@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><link rel="stylesheet" href="popup.css"></head>
 <body>
-<header>Điền hồ sơ đảng viên <span>Bước 1–10 – nhập từ Excel hoặc đám mây · v0.8.9.9</span></header>
+<header>Điền hồ sơ đảng viên <span>Bước 1–10 – nhập từ Excel hoặc đám mây · v0.9.0</span></header>
 <div id="dieuKhien" hidden>
   <div id="dkTT" class="tt">Đang điền…</div>
   <div class="btns">
@@ -75,14 +75,17 @@
       <summary>▶ Chạy tự động B1 → B10 <small>(tự điền, tự bấm Lưu từng mục)</small></summary>
       <div class="btns"><button id="chayTD" class="primary">▶ Bắt đầu chạy tự động</button></div>
       <div class="row" style="margin:4px 0 6px"><span style="white-space:nowrap">▶ Chạy từ bước</span><select id="tuMuc"></select></div>
-      <div style="margin:4px 0 6px"><span>Chỉ chạy các mục đã tick (B2 → B10):</span><div id="tdChonMuc" class="btns"></div></div>
-      <div class="row" style="margin:4px 0 6px"><span style="white-space:nowrap">Chế độ điền</span><select id="tdCheDo">
-        <option value="ca">Cả hai: sửa dòng đã có + thêm dòng chưa có</option>
-        <option value="sua">Chỉ SỬA dòng đã có trên trang</option>
-        <option value="them">Chỉ THÊM MỚI dòng chưa có</option>
-      </select></div>
-      <div class="btns"><button id="chayMau" class="primary">📋 Điền theo mẫu (B2 → B10)</button></div>
-      <label class="chk"><input type="checkbox" id="tdTuLuu10" checked> ⏱ Điền theo mẫu: sau 3 giây mình chưa bấm "Lưu thông tin" thì tiện ích tự bấm Lưu hộ rồi chạy tiếp (đang bấm thì thôi; đợi quá 10 giây bấm lại, lỗi quá 15 giây thì dừng).</label>
+      <details id="tdMauGroup">
+        <summary>📋 Điền theo mẫu (B2 → B10) <small id="tdMauDem">– gọn, bấm để chọn mục</small></summary>
+        <div class="row" style="margin:4px 0 6px"><span style="white-space:nowrap">Chế độ điền</span><select id="tdCheDo">
+          <option value="ca">Cả hai: sửa dòng đã có + thêm dòng chưa có</option>
+          <option value="sua">Chỉ SỬA dòng đã có (đối chiếu đủ trường mới sửa)</option>
+          <option value="them">Chỉ THÊM MỚI dòng chưa có (mở hết trường rồi đối chiếu)</option>
+        </select></div>
+        <div class="td-muc-chon"><div id="tdChonMuc" class="btns"></div></div>
+        <div class="btns"><button id="chayMau" class="primary">📋 Điền theo mẫu (B2 → B10)</button></div>
+        <label class="chk"><input type="checkbox" id="tdTuLuu10" checked> ⏱ Sau 3 giây chưa bấm "Lưu" thì tự bấm hộ (đợi quá 10 giây bấm lại, lỗi quá 15 giây thì dừng).</label>
+      </details>
       <label class="chk"><input type="checkbox" id="tdSuper"> Super – chạy tự động không hỏi gì cả, nghỉ 2 giây giữa mỗi lần lưu; gặp lỗi lớn thì báo và dừng hẳn.</label>
       <label class="chk"><input type="checkbox" id="tdTuChay" checked> Tự chạy hồ sơ kế tiếp (chỉ sau khi đã bấm Bắt đầu chạy)</label>
       <label class="chk"><input type="checkbox" id="tdBoQuaB1"> ⏭ Bỏ qua Bước 1 (Thông tin cơ bản) khi chạy tự động – dùng khi B1 đã điền xong hoặc không cần điền (B1 chạy lâu nhất).</label>
@@ -166,7 +169,10 @@
     <div id="qhDsTv"></div>
     <div class="btns"><button id="qhLocNgay" class="primary">🧹 Lọc trùng ngay (Họ tên + (X))</button><button id="qhBoSung" class="primary">➕ Bổ sung từ đám mây (chỉ thêm dòng thiếu)</button><button id="qhDongModal">Đóng</button></div>
   </div>
+
+
 </div>
+
 <div id="nghiModal" hidden>
   <div id="nghiBox">
     <b id="nghiTieuDe">⚠ Trường AI chưa chắc – sửa trước khi chạy</b>
